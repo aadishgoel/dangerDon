@@ -1,0 +1,22 @@
+<div class="card m-2">
+	<div class="container">
+		<a href="{% url 'music:detail' album.id %}">	
+			<img src="{{ album.album_logo.url }}" class="card-img my-3 img-responsive" alt=" {{album.album_title}} "> 
+		</a>
+		<div class="card-block m-1">
+			<h4 class="card-title"> {{ album.album_title }} </h4>
+			<h6 class="card-subtitle text-muted"> {{ album.artist }}</h6>
+			<div class="row my-2">
+				<a href=" {% url 'music:detail' album.id %} " class="btn btn-primary mr-1">View Details</a>
+
+				<form action=" {% url 'music:album-delete' album.id %} " method="post">
+					{% csrf_token %}
+					<button class="btn btn-outline-secondary mr-1 fa fa-trash-o" type="submit"></button>
+
+				</form>
+
+				<a class="btn btn-outline-secondary fa fa-star-o" href="#">		</a>
+			</div>
+		</div>
+	</div>				
+</div>

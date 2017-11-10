@@ -1,0 +1,24 @@
+{% extends 'music/base.html' %}
+{% block title %} Add Album {% endblock %}
+{% block albums_active %} active {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+	<div class="card col-sm-12 col-md-9 col-lg-7 my-3">
+		<div class="card-block mt-4     ">
+			<div class="card-header">
+				<h4> Add a new Album </h4>
+			</div>
+			<form  action="" method="POST" enctype="multipart/form-data" class="my-3">
+				{% csrf_token %}
+				{% include 'music/form-template.html' %}
+				
+				<div class="form-group">
+					 <button class="btn btn-success" type="submit">Submit</button>
+				</div>
+			</form>
+
+		</div>  
+	</div>
+</div>
+{% endblock %}

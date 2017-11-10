@@ -1,0 +1,26 @@
+{% extends 'music/base.html' %}
+{% load static %}
+
+{% block albums_active %} active {% endblock %}
+{% load static %}
+
+{% block includes %}
+	<link rel="stylesheet" type="text/css" href=" {% static 'music/css/index.css' %} ">
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="container-fluid ">
+		<div class="row" >	 
+			{% for album in all_albums %}
+
+				{% include 'music/card.html' %}	
+
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}
+
+<!--  col-md-3 col-sm-4 -->

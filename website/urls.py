@@ -8,6 +8,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from music import views
 
 urlpatterns = [
+    url('^$', views.Home),
     url(r'^admin/', admin.site.urls),
     url(r'^music/', include('music.urls')),
     url(r'^albums/', views.AlbumList.as_view()),

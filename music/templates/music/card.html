@@ -12,10 +12,15 @@
 				<form action=" {% url 'music:album-delete' album.id %} " method="post">
 					{% csrf_token %}
 					<button class="btn btn-outline-secondary mr-1 fa fa-trash-o" type="submit"></button>
-
-				</form>
-
-				<a class="btn btn-outline-secondary fa fa-star-o" href="#">		</a>
+                </form>
+                <form action="{% url 'music:album-like' album.id %}" method="post">
+                    {% csrf_token %}
+				    <button class="btn btn-outline-secondary mr-1 fa fa-thumbs-o-up" type="submit"></button>
+                </form>
+                <form action="{% url 'music:album-dislike' album.id %}" method="post">
+                    {% csrf_token %}
+				    <button class="btn btn-outline-secondary mr-1 fa fa-thumbs-o-down" type="submit"></button>
+                </form>
 			</div>
 		</div>
 	</div>				

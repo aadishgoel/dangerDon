@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse_lazy
+from django.http.response import HttpResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,12 +13,15 @@ from .models import Album
 from .forms import UserForm
 from .serializers import AlbumSerializer
 
+def Home(request):
+	return render(request, 'music/home.html')
+
 class IndexView(ListView):
 	template_name='music/index.html'
 	context_object_name = 'all_albums'
 
 	def get_queryset(self):
-		return Album.objects.all()
+		return sorted(list(Album.objects.all()), key=lambda x:x.likes/x.dislikes ,reverse=True)
 
 
 class DetailView(DetailView):
@@ -37,9 +41,21 @@ class AlbumDelete(DeleteView):
 	model = Album
 	success_url = reverse_lazy('music:index')
 
-class like(View):
+class Like(View):
+	def post(self,request,pk):
+		a = Album.objects.filter(pk=pk)[0]
+		a.likes += 1
+		a.save()
+		#return redirect('music:detail', pk=pk)
+		return redirect('music:index')
 
-		
+class Dislike(View):
+	def post(self,request,pk):
+		a = Album.objects.filter(pk=pk)[0]
+		a.dislikes += 1
+		a.save()
+		return redirect('music:index')
+
 class UserFormView(View):
 	form_class = UserForm
 	template_name = 'music/registration_form.html'

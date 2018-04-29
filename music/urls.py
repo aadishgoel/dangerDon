@@ -10,9 +10,6 @@ urlpatterns=[
     #/music/
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    #/music/search/
-    url(r'^search/$', views.SearchView.as_view(), name='album-search'),
-
     #/music/register/
     url(r'^register/$', views.UserFormView.as_view(), name='register'),    
 
@@ -39,8 +36,5 @@ urlpatterns=[
 
     # music/album/<pk>/dislike/
     url(r'^album/(?P<pk>[0-9]+)/dislike/$', views.Dislike.as_view(), name='album-dislike'),
-
-    #music/album/<pk>/comment/
-    url(r'^album/(?P<album_pk>[0-9]+)/comment/$', views.CommentView.as_view(), name='album-comment'),    
 
     ]

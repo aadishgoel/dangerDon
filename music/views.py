@@ -9,10 +9,10 @@ from django.http.response import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Album, Comment
+from .models import Album
 from .forms import UserForm
 from .serializers import AlbumSerializer
-from .logic import rating
+
 def Home(request):
 	return render(request, 'music/home.html')
 
@@ -22,15 +22,6 @@ class IndexView(ListView):
 
 	def get_queryset(self):
 		return sorted(list(Album.objects.all()), key=lambda x:x.likes/x.dislikes ,reverse=True)
-
-
-class SearchView(ListView):
-	template_name='music/index.html'
-	context_object_name = 'all_albums'
-
-	def get_queryset(self):
-		query = self.request.GET.get('q')
-		return Album.objects.filter(artist__startswith=str(query))
 
 
 class DetailView(DetailView):
@@ -60,23 +51,8 @@ class Like(View):
 
 class Dislike(View):
 	def post(self,request,pk):
-
 		a = Album.objects.filter(pk=pk)[0]
 		a.dislikes += 1
-		a.save()
-		return redirect('music:index')
-
-class CommentView(View):
-	def post(self,request,album_pk):
-		a = Comment()
-		a.album=Album.objects.filter(pk=album_pk)[0]	
-		if request.method=='POST':
-			print('Hello i am here '+ request.POST.get('comment',''))
-			a.comment = request.POST.get('comment','')
-			a.rating = rating(a.comment)
-			if a.rating>0: a.album.likes += a.rating
-			if a.rating<0: a.album.dislikes += -a.rating
-			a.judged = True
 		a.save()
 		return redirect('music:index')
 

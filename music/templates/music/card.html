@@ -21,6 +21,16 @@
                     {% csrf_token %}
 				    <button class="btn btn-outline-secondary mr-1 fa fa-thumbs-o-down" type="submit"></button>
                 </form>
+                <br />
+                <form action="{% url 'music:album-comment' album.id %}" method="post">
+                	{% csrf_token %}
+                	<div class="input-group mt-1 mb-2">
+  						<input type="text" class="form-control"	placeholder="Enter Comment" name="comment">
+  						<div class="input-group-append">
+    						<button class="btn btn-outline-secondary" type="submit">Post</button>
+						 </div>
+					</div>
+                </form>
 			</div>
 		</div>
 	</div>				

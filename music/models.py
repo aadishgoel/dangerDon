@@ -24,3 +24,12 @@ class Song(models.Model):
 
     def __str__(self):
         return self.song_title
+
+class Comment(models.Model):
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=50)
+    rating = models.IntegerField(default=0)
+    judged = models.BooleanField(default=0)
+
+    def __str__(self):
+        return '{0}- {1}'.format(self.album.album_title,''.join(self.comment)) 

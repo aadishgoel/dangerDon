@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http.response import HttpResponse
 
 from rest_framework.views import APIView

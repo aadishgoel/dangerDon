@@ -10,3 +10,4 @@ Django Music Website with AI capabilities.
 ![](demoImages/Screenshot%20(56).png)
 ![](demoImages/Screenshot%20(57).png)
 ![](demoImages/Screenshot%20(58).png)
+![](demoImages/Screenshot%20(59).png)
